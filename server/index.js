@@ -12,7 +12,9 @@ import salesRoutes from "./routes/client.js";
 
 //data
 import User from "./models/User.js";
-import { dataUser } from "./data/index.js";
+import Product from "./models/Product.js";
+import ProductStat from "./models/ProductStat.js";
+import { dataUser, dataProduct, dataProductStat } from "./data/index.js";
 
 // configuration
 dotenv.config();
@@ -26,10 +28,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
 // routes
-// app.use("/client", clientRoutes);
+app.use("/client", clientRoutes);
 app.use("/general", generalRoutes);
-// app.use("/management", managementRoutes);
-// app.use("/sales", salesRoutes);
+app.use("/management", managementRoutes);
+app.use("/sales", salesRoutes);
 
 // mongoose setup
 const PORT = process.env.PORT || 9000;
@@ -42,5 +44,7 @@ mongoose
     app.listen(PORT, () => console.log(`Server PORT : ${PORT}`));
 
     // User.insertMany(dataUser);
+    // Product.insertMany(dataProduct);
+    // ProductStat.insertMany(dataProductStat);
   })
   .catch((error) => console.log(`${error} did not connect`));
